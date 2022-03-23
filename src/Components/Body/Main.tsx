@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState  } from "react";
 import firebases from "firebase/compat";
 import fireDb from "../Firebase";
 
@@ -6,7 +6,7 @@ import fireDb from "../Firebase";
 export interface Props {
   fullname: string;
   email: string;
-  phone: string;
+  phone:number;
   password: string;
 
 
@@ -14,7 +14,7 @@ export interface Props {
 const initialvalue = {
   fullname: "",
   email: "",
-  phone: "",
+  phone: +91,
   password: "",
 }
 
@@ -30,10 +30,12 @@ const Main = () => {
 
   const onSubmits = ( ) => {
     
-    fireDb.child("form").push(data);
+    fireDb.child( "form" ).push( data );
+    console.log(data)
 
   };
 
+  
 
   /* Firebase.  */
   ;
@@ -75,9 +77,7 @@ const Main = () => {
         <label htmlFor="phone">Enter your phone number:</label>
         <br />
         <input type="number" name="phone" id="phone" className="input-group-prepend" value={ data.phone }
-            onChange={ handleOnchange }
-        
-        /><br />
+            onChange={ handleOnchange }/><br />
         <small id="emailHelp" className="form-text text-muted">
             We'll never share your phone with anyone else.
           </small>
@@ -104,3 +104,19 @@ const Main = () => {
 };
 
 export default Main;
+function getDocs ( dataCollectionRef: any ) {
+  throw new Error( "Function not implemented." );
+}
+
+function dataCollectionRef ( dataCollectionRef: any ) {
+  throw new Error( "Function not implemented." );
+}
+
+function doc ( doc: any ): any {
+  throw new Error( "Function not implemented." );
+}
+
+function getData () {
+  throw new Error( "Function not implemented." );
+}
+
