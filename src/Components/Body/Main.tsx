@@ -1,75 +1,101 @@
 import React, { useState } from "react";
-// import firebases from "firebase/compat";
+import firebases from "firebase/compat";
 import fireDb from "../Firebase";
-import "firebase/compat/database";
+
+
+export interface Props {
+  fullname: string;
+  email: string;
+  phone: string;
+  password: string;
+
+
+}
+const initialvalue = {
+  fullname: "",
+  email: "",
+  phone: "",
+  password: "",
+}
 
 const Main = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<any>({});
-  const [name, setName] = useState<string>();
+  const [ data, setData ] = useState<Props>(initialvalue);
 
-  const userName = (e:string) => {
-    setName(name);
-  };
 
-  const handleOnchangeEmail = (e: any) => {
-    setEmail(e.target.value);
-  };
-  
-  const handleOnchangePassword = (e: any) => {
-    setPassword(e.target.value);
+  const handleOnchange = ( e: any ) => {
+    const name = e.target.name;
+    const vle = e.target.value;
+    setData(pvalue =>({...pvalue,[name]:vle}))
   };
 
-  const user = () => {
-    fireDb.child("form").push(email+password+userName);
+  const onSubmits = ( ) => {
+    
+    fireDb.child("form").push(data);
+
   };
+
+
+  /* Firebase.  */
+  ;
+
+
   return (
     <div>
-      <form>
+      
+      <form onSubmit={ onSubmits }>
         <div className="input-group">
-          <span className="input-group-text">First and last name</span>
+          <span className="input-group-text">Full Name</span>
           <input
             type="text"
+            name="fullname"
             aria-label="First name"
             className="form-control"
-            value={name}
-            // onChange={userName}
+            value={ data.fullname }
+            onChange={ handleOnchange }
           />
         </div>
-        <br /> 
+        <br />
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <br />
           <input
             type="email"
-            onChange={handleOnchangeEmail}
+            name="email"
+            value={ data.email }
+            onChange={ handleOnchange }
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Enter email"
-            value={email}
           />
           <small id="emailHelp" className="form-text text-muted">
             We'll never share your email with anyone else.
           </small>
-        </div>
+        </div><br />
         <label htmlFor="phone">Enter your phone number:</label>
         <br />
-        <input type="tel" id="phone" className="form-text" name="phone"></input>
+        <input type="number" name="phone" id="phone" className="input-group-prepend" value={ data.phone }
+            onChange={ handleOnchange }
+        
+        /><br />
+        <small id="emailHelp" className="form-text text-muted">
+            We'll never share your phone with anyone else.
+          </small>
         <br />
         <div className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
           <input
             type="password"
-            onChange={handleOnchangePassword}
+            name="password"
+            value={data.password}
+            onChange={handleOnchange}
             className="form-control"
             id="exampleInputPassword1"
             placeholder="Password"
-            value={password}
           />
         </div>
-        <br />
-        <button type="submit" className="btn btn-primary" onClick={user}>
+        <br /> 
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </form>
