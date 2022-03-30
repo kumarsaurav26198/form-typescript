@@ -27,8 +27,8 @@ const Footer = () => {
 
     </div>
     <div className="row">
-      <div className="col-sm-12 text-center">
-        Copyright &copy; 2022 Omnifood. All rights reserved
+      <div className="col-sm-6 text-center">
+        Copyright &copy; 2022 Saurav Kumar. All rights reserved
       </div>
     </div>
   </footer>
